@@ -11,5 +11,11 @@ export const rename = async () => {
 
     let finalPath = path.join(__dirname, dirName)
 
+    fs.access(startFilename, err => {
+        if (err) {
+            console.log("FS operation failed");
+            throw err
+        }
+    })
 
 };
