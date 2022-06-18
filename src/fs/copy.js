@@ -1,3 +1,48 @@
+import path from "node:path";
+import {fileURLToPath} from "url";
+import fs from 'node:fs'
+
+// пcallback hell need to refactor callback to promises
+
 export const copy = async () => {
-    // Write your code here 
+
+    let dirName = "files"
+    let dirNameCopy = dirName + "_copy"
+    const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+    let startPath = path.join(__dirname, dirName)
+    let finalPath = path.join(__dirname, dirNameCopy)
+
+
+    fs.access(startPath, err => { // check "files" already exists
+        if (err) {
+            console.log("FS operation failed");
+            throw err
+        }
+        fs.access(finalPath, (err) => { // check "files_copy" already exists
+            if (!err) {
+                console.log("FS operation failed");
+                throw err
+            }
+            fs.mkdir(finalPath, err => { // create directory
+                if (err) {
+                    console.log(err);
+                    throw err
+                }
+                fs.readdir(startPath, (err, files) => {
+                    if (err) {
+                        throw err
+                    }
+                    files.forEach(file => {
+                        fs.copyFile(path.join(startPath, file), path.join(finalPath, file), err => {
+                            if (err) {
+                                throw err
+                            }
+                            // console.log(`${path.join(startPath, file)} was copied to ${path.join(finalPath, file)}`);
+                        })
+                    })
+                })
+            })
+        });
+    })
 };
