@@ -2,7 +2,6 @@ import path from "node:path";
 import {fileURLToPath} from "url";
 import fs from 'node:fs'
 
-// пcallback hell need to refactor callback to promises
 
 export const copy = async () => {
 
@@ -45,4 +44,76 @@ export const copy = async () => {
             })
         });
     })
+
+
+    // fs.access(startPath, err => {
+    //     if (err) {
+    //         console.log("FS operation failed");
+    //         throw err
+    //     }
+    // })
+    //
+    // fs.access(finalPath, err => {
+    //     if (!err) {
+    //         console.log("FS operation failed");
+    //         throw err
+    //     }
+    // })
+    //
+    // fs.mkdir(finalPath, err => { // create directory
+    //     if (err) {
+    //         console.log("FS operation failed");
+    //         throw err
+    //     }
+    // })
+    //
+    // fs.readdir(startPath, (err, files) => {
+    //     if (err) {
+    //         console.log("FS operation failed");
+    //         throw err
+    //     }
+    //
+    //     files.forEach(file => {
+    //         fs.copyFile(path.join(startPath, file), path.join(finalPath, file), err => {
+    //             if (err) {
+    //                 console.log("FS operation failed");
+    //                 throw err
+    //             }
+    //             // console.log(`${path.join(startPath, file)} was copied to ${path.join(finalPath, file)}`);
+    //         })
+    //     })
+    // })
+
+    // await createDirectory(finalPath);
+    // await copyFiles(startPath, finalPath)
 };
+
+copy()
+
+
+// async function createDirectory(path) {
+//     try {
+//         await fs.promises.mkdir(path)
+//     } catch (error) {
+//         console.log("FS operation failed");
+//         throw error
+//     }
+// }
+//
+// async function copyFiles(startPath, finalPath) {
+//     try {
+//         await fs.readdir(startPath, (err, files) => {
+//             if (err) throw err
+//
+//             files.forEach(file => {
+//                 fs.copyFile(path.join(startPath, file), path.join(finalPath, file), err => {
+//                     if (err) throw err
+//                     // console.log(`${path.join(startPath, file)} was copied to ${path.join(finalPath, file)}`);
+//                 })
+//             })
+//         })
+//     } catch (error) {
+//         console.log("FS operation failed");
+//         throw error
+//     }
+// }
