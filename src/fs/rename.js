@@ -9,13 +9,29 @@ export const rename = async () => {
     let finalFilename = "properFilename.md"
     const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-    let finalPath = path.join(__dirname, dirName)
+    let startFilenamePath = path.join(__dirname, dirName, startFilename)
+    let finalFilenamePath = path.join(__dirname, dirName, finalFilename)
 
-    fs.access(startFilename, err => {
+    fs.access(startFilenamePath, err => {
         if (err) {
             console.log("FS operation failed");
+            console.log(`File ${startFilename} doesn't exist`);
             throw err
         }
+        fs.access(finalFilenamePath, err => {
+            if (!err) {
+                console.log("FS operation failed");
+                console.log(`File ${finalFilename} already exists`);
+                throw err
+            }
+            fs.rename(startFilenamePath, finalFilenamePath, err => {
+                if (err) {
+                    console.log("FS operation failed");
+                    console.log(`Unable to rename ${startFilename} to ${finalFilename}`);
+                    throw err
+                }
+            })
+        })
     })
 
 };
