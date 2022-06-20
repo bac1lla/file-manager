@@ -21,7 +21,7 @@ You should implement several functions in dedicated files
 
 You should refactor file (you can add additional imports if needed)
 
-- `cjsToEsm.cjs` - rewrite it to it's equivalent in ECMAScript notation (and switch extension to `.mjs`)
+- `cjsToEsm.mjs` - rewrite it to it's equivalent in ECMAScript notation (and switch extension to `.mjs`)
 
 ### Hash (src/hash)
 
